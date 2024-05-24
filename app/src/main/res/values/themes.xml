@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.VTTicket" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:statusBarColor">@color/viettel_red</item>
+    </style>
+
+    <style name="CustomActionBar" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@color/viettel_red</item>
+    </style>
+
+    <style name="VTTActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="actionBarStyle">@style/CustomActionBar</item>
+    </style>
+
+</resources>

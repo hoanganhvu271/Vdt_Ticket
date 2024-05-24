@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">VT-Ticket</string>
+    <string name="nav_home">Trang chủ</string>
+    <string name="nav_ticket">Vé</string>
+    <string name="nav_noti">Thông báo</string>
+    <string name="nav_profile">Cá nhân</string>
+</resources>

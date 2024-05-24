@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="2dp"
+    android:orientation="vertical">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:backgroundTint="@color/white"
+        app:strokeWidth="1dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:elevation="10dp"
+            android:padding="5dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tv_ticket_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"/>
+                <TextView
+                    android:id="@+id/tv_ticket_car"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tên nhà xe"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    />
+                <TextView
+                    android:id="@+id/tv_ticket_price"
+                    android:layout_weight="1"
+                    android:textColor="@color/viettel_red"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Giá vé"
+                    android:textSize="15sp"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tv_ticket_start_point"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Điểm đi"
+                    android:textSize="15sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_ticket_end_point"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Điểm đến"
+                    android:textSize="15sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_ticket_start_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Thời gian xp"
+                    android:textSize="15sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_ticket_hour"
+                    android:layout_width="match_parent"
+                    android:text="Gio"
+                    android:textSize="15sp"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+            <ImageView
+                android:id="@+id/follow_button"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/heart"
+                android:backgroundTint="@color/viettel_red"/>
+        </LinearLayout>
+
+
+
+
+
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+
+
+</LinearLayout>
