@@ -4,4 +4,8 @@
     <string name="nav_ticket">Vé</string>
     <string name="nav_noti">Thông báo</string>
     <string name="nav_profile">Cá nhân</string>
+    <string name="city_confirm">Thành phố của bạn là </string>
+    <string name="detail_tab">Thông tin</string>
+    <string name="route_tab">Lộ trình</string>
+    <string name="guide_tab">Hướng dẫn</string>
 </resources>

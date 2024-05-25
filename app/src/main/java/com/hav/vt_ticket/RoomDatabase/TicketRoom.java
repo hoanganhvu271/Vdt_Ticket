@@ -25,7 +25,9 @@ public class TicketRoom {
 
     public String carName;
 
-    public TicketRoom(int id, int carId, String startPoint, String endPoint, String startTime, int totalTime, int price, int amount, String carName) {
+    public boolean beFollowed;
+
+    public TicketRoom(int id, int carId, String startPoint, String endPoint, String startTime, int totalTime, int price, int amount, String carName, boolean beFollowed) {
         this.id = id;
         this.carId = carId;
         this.startPoint = startPoint;
@@ -35,6 +37,7 @@ public class TicketRoom {
         this.price = price;
         this.amount = amount;
         this.carName = carName;
+        this.beFollowed = beFollowed;
     }
 
     public int getId() {
@@ -107,6 +110,14 @@ public class TicketRoom {
 
     public void setCarName(String carName) {
         this.carName = carName;
+    }
+
+    public boolean isBeFollowed() {
+        return beFollowed;
+    }
+
+    public void setBeFollowed(boolean beFollowed) {
+        this.beFollowed = beFollowed;
     }
 }
 

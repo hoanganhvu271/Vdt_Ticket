@@ -69,11 +69,35 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketView
                 holder.price.setText(String.valueOf(ticket.getPrice()));
             }
         }
+
+        TicketRoom existingTicket = AppDatabase.getInstance(TicketAdapter.this.context).ticketDAO().getTicketById(ticket.getId());
+        if (existingTicket != null && existingTicket.beFollowed) {
+            holder.followButton.setImageResource(R.drawable.heart_on);
+        } else {
+            holder.followButton.setImageResource(R.drawable.heart);
+        }
+
         holder.followButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TicketRoom ticketRoom = new TicketRoom(ticket.getId(), ticket.getCarId(), ticket.getStartPoint(), ticket.getEndPoint(), ticket.getStartTime(), ticket.getTotalTime(), ticket.getPrice(), ticket.getAmount(), ticket.getCarName());
-                AppDatabase.getInstance(TicketAdapter.this.context).ticketDAO().insertTicket(ticketRoom);
+                TicketRoom existingTicket = AppDatabase.getInstance(TicketAdapter.this.context).ticketDAO().getTicketById(ticket.getId());
+                if (existingTicket == null) {
+                    TicketRoom ticketRoom = new TicketRoom(ticket.getId(), ticket.getCarId(), ticket.getStartPoint(), ticket.getEndPoint(), ticket.getStartTime(), ticket.getTotalTime(), ticket.getPrice(), ticket.getAmount(), ticket.getCarName(), true);
+                    AppDatabase.getInstance(TicketAdapter.this.context).ticketDAO().insertTicket(ticketRoom);
+                    holder.followButton.setImageResource(R.drawable.heart_on);
+                } else {
+                    if(existingTicket.beFollowed){
+                        TicketRoom ticketRoom = new TicketRoom(ticket.getId(), ticket.getCarId(), ticket.getStartPoint(), ticket.getEndPoint(), ticket.getStartTime(), ticket.getTotalTime(), ticket.getPrice(), ticket.getAmount(), ticket.getCarName(), false);
+                        holder.followButton.setImageResource(R.drawable.heart);
+                        AppDatabase.getInstance(TicketAdapter.this.context).ticketDAO().updateTicket(ticketRoom);
+                    }
+                    else{
+                        TicketRoom ticketRoom = new TicketRoom(ticket.getId(), ticket.getCarId(), ticket.getStartPoint(), ticket.getEndPoint(), ticket.getStartTime(), ticket.getTotalTime(), ticket.getPrice(), ticket.getAmount(), ticket.getCarName(), true);
+                        holder.followButton.setImageResource(R.drawable.heart_on);
+                        AppDatabase.getInstance(TicketAdapter.this.context).ticketDAO().updateTicket(ticketRoom);
+                    }
+
+                }
             }
         });
     }

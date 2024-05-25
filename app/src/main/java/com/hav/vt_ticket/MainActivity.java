@@ -24,7 +24,8 @@ import com.hav.vt_ticket.Service.TicketCheckService;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    private Toast backToast;
+    private long pressedBackTime;
     private BottomNavigationView bnv;
     private ViewPager viewPager;
 
@@ -48,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
                 } else if (item.getItemId() == R.id.nav_profile) {
                     viewPager.setCurrentItem(3);
                 }
-
                 return true;
             }
         });
@@ -94,5 +94,18 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(pressedBackTime + 2000 > System.currentTimeMillis()){
+            backToast.cancel();
+            super.onBackPressed();
+            return;
+        } else {
+            backToast = Toast.makeText(getBaseContext(), "Nhấn lần nữa để thoát", Toast.LENGTH_SHORT);
+            backToast.show();
+        }
+        pressedBackTime = System.currentTimeMillis();
     }
 }

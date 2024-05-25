@@ -6,6 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
+import com.hav.vt_ticket.Model.Car;
 import com.hav.vt_ticket.Model.Location;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -33,4 +34,10 @@ public interface ApiService {
 
     @GET("get-price")
     Call<ApiResponse<Ticket>>getPrice(@Query("id") int id);
+
+    @GET("get-ticket")
+    Call<ApiResponse<Ticket>>getTicketById(@Query("id") int id);
+
+    @GET("get-car")
+    Call<ApiResponse<Car>>getCarById(@Query("id") int id);
 }

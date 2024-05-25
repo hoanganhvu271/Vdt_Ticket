@@ -4,21 +4,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ProgressBar;
-import android.widget.SearchView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.hav.vt_ticket.Adapter.LocationAdapter;
 import com.hav.vt_ticket.Adapter.TicketAdapter;
 import com.hav.vt_ticket.Api.ApiResponse;
 import com.hav.vt_ticket.Api.ApiService;
-import com.hav.vt_ticket.Model.Location;
 import com.hav.vt_ticket.Model.Ticket;
+import com.hav.vt_ticket.RoomDatabase.AppDatabase;
+import com.hav.vt_ticket.RoomDatabase.TicketRoom;
 
 import java.util.List;
 
@@ -57,7 +55,11 @@ public class TicketActivity extends AppCompatActivity {
 
         loadTicketDataFromApi();
 
+
+
     }
+
+
 
     private void loadTicketDataFromApi() {
         progressBar.setVisibility(ProgressBar.VISIBLE);
@@ -73,7 +75,13 @@ public class TicketActivity extends AppCompatActivity {
                     TicketAdapter ticketAdapter = new TicketAdapter(ticketList, TicketActivity.this, new TicketAdapter.ItemClickListener(){
                         @Override
                         public void onItemClick(int position) {
-//                            Toast.makeText(TicketActivity.this, "Item clicked", Toast.LENGTH_SHORT).show();
+
+                            saveViewedHistory(ticketList.get(position));
+
+                            Intent intent = new Intent(TicketActivity.this, DetailActivity.class);
+                            intent.putExtra("ticket", ticketList.get(position).getId());
+//                            Log.d("Vu", "onItemClick: " + ticketList.get(position).getId());
+                            startActivity(intent);
                         }
 
                     });
@@ -89,5 +97,17 @@ public class TicketActivity extends AppCompatActivity {
                 Toast.makeText(TicketActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void saveViewedHistory(Ticket ticket){
+        AppDatabase db = AppDatabase.getInstance(this);
+        TicketRoom existedTicket = db.ticketDAO().getTicketById(ticket.getId());
+        if (existedTicket != null){
+            return;
+        }
+        else{
+            TicketRoom ticketRoom = new TicketRoom(ticket.getId(), ticket.getCarId(), ticket.getStartPoint(), ticket.getEndPoint(), ticket.getStartTime(),ticket.getTotalTime(), ticket.getPrice(), ticket.getAmount(), ticket.getCarName(), false);
+            db.ticketDAO().insertTicket(ticketRoom);
+        }
     }
 }

@@ -9,9 +9,22 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.util.Log;
 
+import java.util.List;
+
 import androidx.annotation.Nullable;
 
+import com.hav.vt_ticket.Api.ApiResponse;
+import com.hav.vt_ticket.Api.ApiService;
+import com.hav.vt_ticket.Model.Ticket;
+import com.hav.vt_ticket.RoomDatabase.AppDatabase;
+
+import com.hav.vt_ticket.RoomDatabase.NotificationRoom;
+import com.hav.vt_ticket.RoomDatabase.TicketRoom;
 import com.hav.vt_ticket.Utils.NotificationUtils;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class TicketCheckService extends Service {
 
@@ -46,15 +59,44 @@ public class TicketCheckService extends Service {
         stopForeground(true);
     }
 
-
     private void schedulePriceCheck() {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                // Thực hiện kiểm tra giá vé ở đây
-                // Nếu giá vé giảm, gửi thông báo cho người dùng
-                Notification noti = NotificationUtils.createNotification(TicketCheckService.this, "Viettel Ticket", "Giá vé đã giảm, hãy đặt vé ngay!");
-                NotificationUtils.showNotification(TicketCheckService.this, noti);
+                List<TicketRoom> ticket = AppDatabase.getInstance(TicketCheckService.this).ticketDAO().getAllTickets();
+
+                for (TicketRoom t : ticket) {
+                    ApiService.apiService.getPrice(t.getId()).enqueue(new Callback<ApiResponse<Ticket>>() {
+                        @Override
+                        public void onResponse(Call<ApiResponse<Ticket>> call, Response<ApiResponse<Ticket>> response) {
+                            if (response.body() != null) {
+                                List<Ticket> ticketList = response.body().getData();
+                                if (!ticketList.isEmpty()) {
+                                    Ticket ticket = ticketList.get(0);
+                                    if (ticket.getPrice() < t.getPrice()) {
+                                        String title = "Viettel Ticket";
+                                        String content = "Giá vé đi từ " + t.getStartPoint() + " đến " + t.getEndPoint() + " đã giảm, hãy đặt vé ngay!";
+                                        Notification noti = NotificationUtils.createNotification(TicketCheckService.this, title, content);
+                                        NotificationUtils.showNotification(TicketCheckService.this, noti);
+
+                                        //Add to database:
+                                        NotificationRoom notificationRoom = new NotificationRoom(title, content);
+                                        AppDatabase.getInstance(TicketCheckService.this).notificationDAO().insertNoti(notificationRoom);
+                                    }
+
+                                    //Update price:
+                                    AppDatabase.getInstance(TicketCheckService.this).ticketDAO().updatePrice(ticket.getPrice(), t.getId());
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ApiResponse<Ticket>> call, Throwable t) {
+                            Log.d("Vu", "onFailure: " + t.getMessage());
+                        }
+                    });
+
+                }
                 handler.postDelayed(this, INTERVAL);
             }
         }, INTERVAL);

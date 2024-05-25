@@ -1,7 +1,10 @@
 package com.hav.vt_ticket.Model;
 
 import com.google.gson.annotations.SerializedName;
-public class Ticket {
+
+import java.io.Serializable;
+
+public class Ticket implements Serializable {
 
     @SerializedName("id")
     private int id;

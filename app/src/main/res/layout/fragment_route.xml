@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/tv_route_start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Xuat phats"/>
+
+    <TextView
+        android:id="@+id/tv_route_time_start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="thoi gian xuat phat"/>
+
+    <TextView
+        android:id="@+id/tv_route_time_total"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tong thoi gian"/>
+
+    <TextView
+        android:id="@+id/tv_route_end"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Diem den"/>
+
+
+    <TextView
+        android:id="@+id/tv_route_time_end"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thoi gian den"/>
+
+</LinearLayout>
