@@ -8,4 +8,20 @@
     <string name="detail_tab">Thông tin</string>
     <string name="route_tab">Lộ trình</string>
     <string name="guide_tab">Hướng dẫn</string>
+    <string name="username_hint">Tên đăng nhập</string>
+    <string name="password_hint">Mật khẩu</string>
+    <string name="login_button">Đăng nhập</string>
+    <string name="register_button">Đăng ký</string>
+    <string name="login_recommend">Đăng nhập hoặc đăng ký để sử dụng dịch vụ</string>
+    <string name="ticket_change_day">Không thể đổi lịch sau khi đặt vé</string>
+    <string name="ticket_refund">Để hủy vé và yêu cầu hoàn tiền, hãy lin hệ với Viettel Ticket</string>
+    <string name="detail_title_1">Thông tin xe</string>
+    <string name="detail_title_2">Dịch vụ</string>
+    <string name="detail_title_3">Chính sách</string>
+    <string name="detail_title_4">Đánh giá</string>
+    <string name="cant_exchange">Không áp dụng đổi lịch</string>
+    <string name="can_refund">Được hoàn tiền</string>
+    <string name="car_name">Nhà xe:</string>
+    <string name="car_capacity">Sức chứa:</string>
+    <string name="car_type">Loại xe:</string>
 </resources>

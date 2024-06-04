@@ -39,13 +39,10 @@ public class HomeFragment extends Fragment {
     private MainActivity mainActivity;
     private TextView tvCalendar;
     private Button searchBtn;
-
     private ImageView switchButton;
 
     private View startPoint;
     private View endPoint;
-
-
 
     @Nullable
     @Override

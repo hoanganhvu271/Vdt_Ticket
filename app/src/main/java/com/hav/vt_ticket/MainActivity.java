@@ -3,6 +3,7 @@ package com.hav.vt_ticket;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.view.View;
@@ -20,7 +21,7 @@ import com.hav.vt_ticket.Fragment.HomeFragment;
 import com.hav.vt_ticket.Fragment.NotiFragment;
 import com.hav.vt_ticket.Fragment.ProfileFragment;
 import com.hav.vt_ticket.Fragment.TicketFragment;
-import com.hav.vt_ticket.Service.TicketCheckService;
+//import com.hav.vt_ticket.Service.TicketCheckService;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        String token = getSharedPreferences("MySharedPref", MODE_PRIVATE).getString("token", "");
+        Log.d("Vu", token);
 
         viewPager = findViewById(R.id.view_pager);
         setUpViewPager(viewPager);
@@ -52,8 +56,8 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-        Intent serviceIntent = new Intent(this, TicketCheckService.class);
-        startService(serviceIntent);
+//        Intent serviceIntent = new Intent(this, TicketCheckService.class);
+//        startService(serviceIntent);
     }
 
     @Override

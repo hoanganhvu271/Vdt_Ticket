@@ -18,10 +18,11 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import com.hav.vt_ticket.Utils.FormatUtils;
 
 public class RouteFragment extends Fragment {
 
-    private TextView tvRouteStart, tvRouteTimeStart, tvRouteEnd, tvRouteTimeEnd, tvRouteTimeTotal;
+    private TextView tvRouteStart, tvRouteTimeStart, tvRouteEnd, tvRouteTimeEnd, tvRouteTimeTotal, tvRouteDayStart , tvRouteDayEnd;
     private Ticket ticket;
 
     @Nullable
@@ -31,30 +32,31 @@ public class RouteFragment extends Fragment {
                 R.layout.fragment_route, container, false);
         tvRouteStart = view.findViewById(R.id.tv_route_start);
         tvRouteTimeStart = view.findViewById(R.id.tv_route_time_start);
+        tvRouteDayStart = view.findViewById(R.id.tv_route_day_start);
         tvRouteEnd = view.findViewById(R.id.tv_route_end);
         tvRouteTimeEnd = view.findViewById(R.id.tv_route_time_end);
+        tvRouteDayEnd = view.findViewById(R.id.tv_route_day_end);
         tvRouteTimeTotal = view.findViewById(R.id.tv_route_time_total);
 
         ticket = (Ticket) getArguments().getSerializable("ticket");
 
+        String timeStart = ticket.getStartTime().split(" ")[1];
+        String dateStart = ticket.getStartTime().split(" ")[0];
+
+
         tvRouteStart.setText(ticket.getStartPoint());
-        tvRouteTimeStart.setText(ticket.getStartTime());
+        tvRouteTimeStart.setText(timeStart);
+        tvRouteDayStart.setText(dateStart);
         tvRouteEnd.setText(ticket.getEndPoint());
 
-        tvRouteTimeTotal.setText(String.valueOf(ticket.getTotalTime()));
+        tvRouteTimeTotal.setText("+" + ticket.getTotalTime() + " giờ");
 
         try {
-
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault());
-            Date startTime = sdf.parse(ticket.getStartTime());
-
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(startTime);
-            calendar.add(Calendar.HOUR, ticket.getTotalTime());
-
-            String endTime = sdf.format(calendar.getTime());
-
-            tvRouteTimeEnd.setText(endTime);
+            String endTime = FormatUtils.getEndDay(ticket.getStartTime(), ticket.getTotalTime());
+            String timeEnd = endTime.split(" ")[1];
+            String dayEnd = endTime.split(" ")[0];
+            tvRouteTimeEnd.setText(timeEnd);
+            tvRouteDayEnd.setText(dayEnd);
         } catch (Exception e) {
             e.printStackTrace();
         }

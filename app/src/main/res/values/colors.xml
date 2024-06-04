@@ -9,4 +9,18 @@
     <color name="white">#FFFFFFFF</color>
     <color name="viettel_red">#EE0033</color>
     <color name="gray_bg">#bdbfbe</color>
+
+
+    <color name="background_color">#F5F5F5</color>
+    <color name="cardBackground">#FFFFFFFF</color>
+    <color name="cardStroke">#DDDDDD</color>
+    <color name="iconColor">#FF6200EE</color>
+    <color name="textColorPrimary">#212121</color>
+    <color name="list_bg">#d5dbe3</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="zalo">#0068FF</color>
+
+
+
 </resources>

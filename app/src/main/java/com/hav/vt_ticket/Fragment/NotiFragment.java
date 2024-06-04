@@ -1,5 +1,6 @@
 package com.hav.vt_ticket.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,7 +41,16 @@ public class NotiFragment extends Fragment {
         NotiAdapter adapter = new NotiAdapter( notificationList, this.getActivity(), new NotiAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                //Jump to Ticket Info;
+                String intentName = notificationList.get(position).getIntentName();
+                try {
+                    Class<?> intentClass = Class.forName("com.hav.vt_ticket." + intentName);
+                    Intent intent = new Intent(getContext(), intentClass);
+                    intent.putExtra("ticket", notificationList.get(position).getTicketId());
+                    startActivity(intent);
+                } catch (ClassNotFoundException e) {
+
+                    e.printStackTrace();
+                }
             }
 
         });

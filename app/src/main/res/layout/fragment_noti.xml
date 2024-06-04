@@ -6,6 +6,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:text="Thông báo"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_noti"
         android:layout_width="match_parent"

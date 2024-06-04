@@ -1,90 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cv_followed_ticket"
+    <LinearLayout
+        android:id="@+id/topbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:backgroundTint="#45C3C3C3"
-        app:cardCornerRadius="8dp">
+        android:layout_alignParentTop="true"
+        android:background="@color/viettel_red"
+        android:orientation="vertical"
+        android:paddingBottom="50dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="16dp">
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ticket"
-                android:layout_gravity="center_vertical"
-                android:layout_marginEnd="8dp"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Đang theo dõi"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="#000" />
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cv_bought_ticket"
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="3dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/logo2" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
+                    android:fontFamily="@font/magistra"
+                    android:text="Ticket"
+                    android:textColor="@color/white"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:backgroundTint="#45C3C3C3"
-        app:cardCornerRadius="8dp">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/topbar"
+        android:layout_marginTop="-30dp"
+        android:background="@drawable/roundcorners"
+        android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="16dp">
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ticket"
-                android:layout_gravity="center_vertical"
-                android:layout_marginEnd="8dp"/>
-            <TextView
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp"
+            tools:context=".MainActivity">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_followed_ticket"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Đã mua"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="#000" />
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
+                android:layout_marginTop="20dp"
+                android:backgroundTint="#45C3C3C3"
+                app:strokeWidth="1dp">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cv_viewed_ticket"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#45C3C3C3"
-        app:cardCornerRadius="8dp">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="16dp">
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ticket"
-                android:layout_gravity="center_vertical"
-                android:layout_marginEnd="8dp"/>
-            <TextView
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="14dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="16dp"
+                        android:src="@drawable/ticket" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Đang theo dõi"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/textColorPrimary" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_bought_ticket"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Lịch sử xem"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="#000" />
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
+                android:layout_marginTop="20dp"
+                android:backgroundTint="#45C3C3C3"
+                app:strokeWidth="1dp">
 
-</LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="14dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="16dp"
+                        android:src="@drawable/money" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Đã mua"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/textColorPrimary" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_viewed_ticket"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="#45C3C3C3"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="14dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="16dp"
+                        android:src="@drawable/history" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Lịch sử xem"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/textColorPrimary" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
+
+
+

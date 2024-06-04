@@ -9,7 +9,7 @@
         android:id="@+id/img_detail_ticket"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:src="@drawable/logo_not_crop" />
+        android:src="@drawable/hoanglong" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tbl_detail_ticket"
@@ -26,12 +26,22 @@
         android:layout_below="@id/tbl_detail_ticket">
     </androidx.viewpager.widget.ViewPager>
 
+    <ProgressBar
+        android:id="@+id/tk_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_centerInParent="true"
+        android:indeterminateDrawable="@drawable/custom_pb"
+        android:visibility="gone"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="15dp"
+        android:padding="5dp"
+        android:background="@color/white"
         android:gravity="center">
 
         <LinearLayout
@@ -47,8 +57,12 @@
                 android:textColor="@color/viettel_red"
                 android:textStyle="bold"
                 android:text="Giá"
-                android:textSize="20sp"/>
+                android:textSize="18sp"/>
         </LinearLayout>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/darker_gray"/>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -57,8 +71,10 @@
             android:gravity="center">
 
             <Button
+                android:id="@+id/pay_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/viettel_red"
                 android:text="Đặt vé" />
         </LinearLayout>
 

@@ -8,11 +8,13 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.SearchView;
@@ -26,6 +28,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.hav.vt_ticket.Adapter.LocationAdapter;
 import com.hav.vt_ticket.Api.ApiResponse;
 import com.hav.vt_ticket.Api.ApiService;
@@ -38,6 +41,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import android.widget.ProgressBar;
+import android.util.Log;
+
+import org.osmdroid.config.Configuration;
+import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.Marker;
 
 public class LocationActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -84,7 +93,8 @@ public class LocationActivity extends AppCompatActivity {
                 try {
                     List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
                     String cityName = addresses.get(0).getAdminArea();
-                    OpenPopUp( cityName);
+                    OpenPopUp( cityName, latitude, longitude);
+
 //                    Toast.makeText(this, "Your city is: " + cityName, Toast.LENGTH_SHORT).show();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -94,14 +104,33 @@ public class LocationActivity extends AppCompatActivity {
             }
         } else {
             Toast.makeText(this, "Permission not granted", Toast.LENGTH_SHORT).show();
-//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, YOUR_REQUEST_CODE);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         }
     }
 
-    private void OpenPopUp(String cityName) {
+    private void OpenPopUp(String cityName, double latitude, double longitude) {
         LayoutInflater layoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         View popupView = layoutInflater.inflate(R.layout.popup_location, null);
 
+
+
+        //Visualize map
+        MapView mapView = popupView.findViewById(R.id.city_map_view);
+        Configuration.getInstance().load(getApplicationContext(), PreferenceManager.getDefaultSharedPreferences(getApplicationContext()));
+        mapView.setMultiTouchControls(true);
+
+        GeoPoint startPoint = new GeoPoint(latitude, longitude);
+        mapView.getController().setZoom(15);
+        mapView.getController().setCenter(startPoint);
+
+        Marker startMarker = new Marker(mapView);
+        startMarker.setPosition(startPoint);
+        startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        mapView.getOverlays().add(startMarker);
+
+
+
+        //Popup window
         int height = ViewGroup.LayoutParams.WRAP_CONTENT;
         int width = ViewGroup.LayoutParams.WRAP_CONTENT;
         boolean focusable = true;
@@ -111,8 +140,16 @@ public class LocationActivity extends AppCompatActivity {
         tvCity.setText( "Thành phố của bạn là " + cityName + "?");
         popupWindow.showAtLocation(findViewById(R.id.activity_location), Gravity.CENTER, 0, 0);
 
+        final View dimLayout = findViewById(R.id.dim_layout);
+        dimLayout.setVisibility(View.VISIBLE);
+
+        popupWindow.setOnDismissListener(() -> dimLayout.setVisibility(View.GONE));
+
         Button btnYes = popupView.findViewById(R.id.btn_city_yes);
         Button btnNo = popupView.findViewById(R.id.btn_city_no);
+
+
+        //On click event
 
         btnYes.setOnClickListener(v -> {
             String name = cityName;
@@ -126,6 +163,7 @@ public class LocationActivity extends AppCompatActivity {
 
         btnNo.setOnClickListener(v -> {
             popupWindow.dismiss();
+            dimLayout.setVisibility(View.GONE);
         });
     }
 

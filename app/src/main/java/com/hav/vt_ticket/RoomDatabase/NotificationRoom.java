@@ -1,5 +1,7 @@
 package com.hav.vt_ticket.RoomDatabase;
 
+import android.app.PendingIntent;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -13,9 +15,15 @@ public class NotificationRoom {
 
     private String content;
 
-    public NotificationRoom(String title, String content) {
+    private String intentName;
+
+    private int ticketId;
+
+    public NotificationRoom(String title, String content, String intentName, int ticketId) {
         this.title = title;
         this.content = content;
+        this.intentName = intentName;
+        this.ticketId = ticketId;
     }
 
     public int getId() {
@@ -41,4 +49,21 @@ public class NotificationRoom {
     public void setContent(String content) {
         this.content = content;
     }
+
+    public String getIntentName() {
+        return intentName;
+    }
+
+    public void setIntentName(String intentName) {
+        this.intentName = intentName;
+    }
+
+    public int getTicketId() {
+        return ticketId;
+    }
+
+    public void setTicketId(int ticketId) {
+        this.ticketId = ticketId;
+    }
+
 }

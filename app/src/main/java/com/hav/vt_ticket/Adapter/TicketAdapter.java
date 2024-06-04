@@ -18,16 +18,23 @@ import com.hav.vt_ticket.Model.Ticket;
 import com.hav.vt_ticket.R;
 import com.hav.vt_ticket.RoomDatabase.AppDatabase;
 import com.hav.vt_ticket.RoomDatabase.TicketRoom;
+import com.hav.vt_ticket.Utils.FormatUtils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
-public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketViewHolder>  {
+public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketViewHolder> {
     private List<Ticket> ticketList;
     private Context context;
     private List<Ticket> ticketOldList;
     private ItemClickListener listener;
-    public TicketAdapter(List<Ticket> ticketList,Context context, ItemClickListener listener) {
+
+    public TicketAdapter(List<Ticket> ticketList, Context context, ItemClickListener listener) {
 
         this.ticketList = ticketList;
         this.ticketOldList = ticketList;
@@ -45,29 +52,23 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketView
     @Override
     public void onBindViewHolder(@NonNull TicketAdapter.TicketViewHolder holder, int position) {
         Ticket ticket = ticketList.get(position);
-        Log.d("Vu", ticketList.size() + "");
+        String day = ticket.getStartTime().split(" ")[0];
+        String time = FormatUtils.getHour(ticket.getStartTime());
+        String endTime = FormatUtils.getEndDay(ticket.getStartTime(), ticket.getTotalTime());
+        String endHour = FormatUtils.getHour(endTime);
+
         if (ticket != null) {
-            if (holder.ticketId != null) {
-                holder.ticketId.setText(String.valueOf(ticket.getId()));
-            }
-            if (holder.carName != null) {
-                holder.carName.setText(ticket.getCarName());
-            }
-            if (holder.stPoint != null) {
-                holder.stPoint.setText(ticket.getStartPoint());
-            }
-            if (holder.endPoint != null) {
-                holder.endPoint.setText(ticket.getEndPoint());
-            }
-            if (holder.stTime != null) {
-                holder.stTime.setText(ticket.getStartTime());
-            }
-            if (holder.totalTime != null) {
-                holder.totalTime.setText(String.valueOf(ticket.getTotalTime()));
-            }
-            if (holder.price != null) {
-                holder.price.setText(String.valueOf(ticket.getPrice()));
-            }
+
+            holder.ticketId.setText(String.valueOf(ticket.getId()));
+            holder.carName.setText(ticket.getCarName());
+            holder.stPoint.setText(ticket.getStartPoint());
+            holder.endPoint.setText(ticket.getEndPoint());
+            holder.stTime.setText(time);
+            holder.totalTime.setText(String.valueOf(ticket.getTotalTime() )+ "h");
+            holder.price.setText(FormatUtils.getMoneyType(ticket.getPrice()));
+            holder.stDay.setText(day);
+            holder.endTime.setText(endHour);
+
         }
 
         TicketRoom existingTicket = AppDatabase.getInstance(TicketAdapter.this.context).ticketDAO().getTicketById(ticket.getId());
@@ -86,12 +87,11 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketView
                     AppDatabase.getInstance(TicketAdapter.this.context).ticketDAO().insertTicket(ticketRoom);
                     holder.followButton.setImageResource(R.drawable.heart_on);
                 } else {
-                    if(existingTicket.beFollowed){
+                    if (existingTicket.beFollowed) {
                         TicketRoom ticketRoom = new TicketRoom(ticket.getId(), ticket.getCarId(), ticket.getStartPoint(), ticket.getEndPoint(), ticket.getStartTime(), ticket.getTotalTime(), ticket.getPrice(), ticket.getAmount(), ticket.getCarName(), false);
                         holder.followButton.setImageResource(R.drawable.heart);
                         AppDatabase.getInstance(TicketAdapter.this.context).ticketDAO().updateTicket(ticketRoom);
-                    }
-                    else{
+                    } else {
                         TicketRoom ticketRoom = new TicketRoom(ticket.getId(), ticket.getCarId(), ticket.getStartPoint(), ticket.getEndPoint(), ticket.getStartTime(), ticket.getTotalTime(), ticket.getPrice(), ticket.getAmount(), ticket.getCarName(), true);
                         holder.followButton.setImageResource(R.drawable.heart_on);
                         AppDatabase.getInstance(TicketAdapter.this.context).ticketDAO().updateTicket(ticketRoom);
@@ -105,7 +105,7 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketView
 
     @Override
     public int getItemCount() {
-        if(ticketList != null){
+        if (ticketList != null) {
             return ticketList.size();
         }
         return 0;
@@ -113,17 +113,7 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketView
 
     public class TicketViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private TextView ticketId;
-        private TextView carName;
-        private TextView stPoint;
-
-        private TextView endPoint;
-
-        private TextView stTime;
-
-        private TextView totalTime;
-
-        private TextView price;
+        private TextView ticketId, carName, stPoint, endPoint, stTime, stDay, endTime, totalTime, price;
 
         private ImageView followButton;
 
@@ -137,6 +127,8 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketView
             stTime = itemView.findViewById(R.id.tv_ticket_start_time);
             totalTime = itemView.findViewById(R.id.tv_ticket_hour);
             price = itemView.findViewById(R.id.tv_ticket_price);
+            stDay = itemView.findViewById(R.id.tv_ticket_day);
+            endTime = itemView.findViewById(R.id.tv_ticket_end_time);
 
             followButton = itemView.findViewById(R.id.follow_button);
 

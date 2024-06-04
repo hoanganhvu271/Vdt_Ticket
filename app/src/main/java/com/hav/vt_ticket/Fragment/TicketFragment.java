@@ -2,6 +2,7 @@ package com.hav.vt_ticket.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.card.MaterialCardView;
 import com.hav.vt_ticket.FollowedTicketActivity;
+import com.hav.vt_ticket.LoginActivity;
+import com.hav.vt_ticket.PurchasedTicketActivity;
 import com.hav.vt_ticket.R;
 import com.hav.vt_ticket.ViewedTicketActivity;
 
@@ -40,6 +43,24 @@ public class TicketFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ViewedTicketActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        boughtCardView = view.findViewById(R.id.cv_bought_ticket);
+        boughtCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String token = getActivity().getSharedPreferences("MySharedPref", getActivity().MODE_PRIVATE).getString("token", "");
+                Log.d("Vu", token);
+                if(token.isEmpty()){
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    intent.putExtra("to", PurchasedTicketActivity.class.getSimpleName());
+                    startActivity(intent);
+                }
+                else{
+                    Intent intent = new Intent(getActivity(), PurchasedTicketActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 

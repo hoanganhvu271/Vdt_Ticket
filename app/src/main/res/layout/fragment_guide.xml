@@ -1,7 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black">
+    >
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="80dp"
+        android:paddingEnd="10dp"
+        android:orientation="vertical"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:text="Cách sử dụng vé điện tử Viettel Ticket"/>
+
+        <TextView
+            android:id="@+id/tv_guide_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="content1"/>
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:text="Điều khoản và diều kiện"/>
+
+        <TextView
+            android:id="@+id/tv_guide_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="content2"/>
+
+    </LinearLayout>
+</ScrollView>

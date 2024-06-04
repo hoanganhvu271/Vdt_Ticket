@@ -8,6 +8,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
 
     <application
         android:allowBackup="true"
@@ -19,16 +21,46 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.VTTicket"
         tools:targetApi="31">
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/logo" />
+
+<!--        <service android:name=".Service.TicketCheckService" />-->
+
+        <service
+            android:name=".Service.TicketCheckFirebase"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <receiver android:name=".BroadcastReceiver.BootReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.VTTicket">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.VTTicket">
+
         </activity>
         <activity
             android:name=".LocationActivity"
@@ -61,10 +93,47 @@
             android:name=".ViewedTicketActivity"
             android:exported="true"
             android:theme="@style/Theme.VTTicket">
+        </activity>
+
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true"
+            android:theme="@style/Theme.VTTicket">
+        </activity>
+
+        <activity
+            android:name=".PaymentActivity"
+            android:launchMode="singleTask"
+            android:exported="true"
+            android:theme="@style/Theme.VTTicket">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="demozpdk"
+                    android:host="app" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".BillingActivity"
+            android:exported="true"
+            android:theme="@style/Theme.VTTicket"/>
+        <activity
+            android:name=".PurchasedTicketActivity"
+            android:exported="true"
+            android:theme="@style/Theme.VTTicket">
 
         </activity>
 
-        <service android:name=".Service.TicketCheckService" />
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="true"
+            android:theme="@style/Theme.VTTicket">
+
+        </activity>
+
     </application>
 
 </manifest>

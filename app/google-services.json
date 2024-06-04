@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "670637118697",
+    "project_id": "vt-ticket",
+    "storage_bucket": "vt-ticket.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:670637118697:android:e9c3d9dc3c5c86541e4c78",
+        "android_client_info": {
+          "package_name": "com.hav.vt_ticket"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9ogNN3ytOsWHUGB0Aws9iGSXFVRGIgQ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

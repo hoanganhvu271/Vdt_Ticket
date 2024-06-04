@@ -3,38 +3,106 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10dp"
-    android:background="@color/white">
+    android:background="@color/list_bg">
 
     <TextView
-        android:id="@+id/tv_route_start"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Xuat phats"/>
+        android:text="Tuyến đường"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="15dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"/>
 
-    <TextView
-        android:id="@+id/tv_route_time_start"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="thoi gian xuat phat"/>
+        android:background="@color/white"
+        android:padding="15dp"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="4">
 
-    <TextView
-        android:id="@+id/tv_route_time_total"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Tong thoi gian"/>
+            <TextView
+                android:id="@+id/tv_route_time_start"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:text="gio xuat phat"/>
+            <TextView
+                android:id="@+id/tv_route_day_start"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:textSize="12sp"
+                android:text="ngay xuat phat"/>
 
-    <TextView
-        android:id="@+id/tv_route_end"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Diem den"/>
+            <TextView
+                android:id="@+id/tv_route_time_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40dp"
+                android:layout_marginTop="40dp"
+                android:text="Tong thoi gian"/>
+
+            <TextView
+                android:id="@+id/tv_route_time_end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:text="Gio den"/>
+
+            <TextView
+                android:id="@+id/tv_route_day_end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:textSize="12sp"
+                android:text="Ngay den"/>
+
+        </LinearLayout>
+        <View
+            android:layout_width="1dp"
+            android:background="@color/black"
+            android:layout_height="match_parent"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="15dp"
+            android:layout_weight="2">
+            <TextView
+                android:id="@+id/tv_route_start"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="135dp"
+                android:text="Xuat phats"/>
+
+            <TextView
+                android:id="@+id/tv_route_end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Diem den"/>
+
+        </LinearLayout>
 
 
-    <TextView
-        android:id="@+id/tv_route_time_end"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Thoi gian den"/>
+
+
+
+    </LinearLayout>
+
+
 
 </LinearLayout>

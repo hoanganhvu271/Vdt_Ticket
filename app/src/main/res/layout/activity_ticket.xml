@@ -1,41 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
+    android:background="@color/list_bg"
     android:orientation="vertical">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <include layout="@layout/toolbar_ticket_list"/>
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/ticket_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/viettel_red"
-            app:navigationIcon="@drawable/baseline_arrow_back_24"
-            app:titleTextColor="@color/white"
-            app:title="Hanoi - TP HCM" />
-    </com.google.android.material.appbar.AppBarLayout>
+    <include layout="@layout/layout_empty"/>
 
+    <include layout="@layout/dialog_loading"/>
 
-    <ProgressBar
-        android:id="@+id/tk_progress_bar"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:indeterminateDrawable="@drawable/custom_pb"
-        android:visibility="gone"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_ticket"
         android:layout_width="match_parent"
-        android:layout_margin="10dp"
-        android:layout_height="match_parent">
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="60dp"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/app_bar_layout">
 
     </androidx.recyclerview.widget.RecyclerView>
 
-</LinearLayout>
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:cardElevation="10dp"
+        app:strokeWidth="0dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:background="@color/white"
+            android:gravity="center">
+
+            <LinearLayout
+                android:id="@+id/btn_change"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:padding="8dp">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="30dp"
+                    android:src="@drawable/searchblack"/>
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tìm kiếm"
+                    android:layout_marginStart="10dp"
+                    android:layout_gravity="center"
+                    android:textSize="16sp"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/darker_gray"/>
+
+            <LinearLayout
+                android:id="@+id/btn_sort"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:layout_marginStart="30dp"
+                android:padding="8dp">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/sort"/>
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sắp xếp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="center"
+                    android:textSize="16sp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+
+</RelativeLayout>

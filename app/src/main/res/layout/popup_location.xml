@@ -1,42 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="#ffff">
 
-    <LinearLayout
-        android:id="@+id/pop_up_location"
-        android:layout_width="300dp"
-        android:layout_height="100dp"
-        android:background="@color/white"
-        android:padding="10dp"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/tv_city_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="5dp"
-            android:text="Vị trí của bạn là"/>
-
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:strokeWidth="1dp"
+        android:elevation="8dp">
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/pop_up_location"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
-            <Button
-                android:id="@+id/btn_city_yes"
-                android:layout_width="wrap_content"
-                android:layout_gravity="center"
-                android:layout_height="wrap_content"
-                android:text="Xác nhận"/>
+            android:padding="10dp"
+            android:orientation="vertical"
+            >
 
-            <Button
-                android:id="@+id/btn_city_no"
+            <TextView
+                android:id="@+id/tv_city_name"
                 android:layout_width="wrap_content"
-                android:layout_gravity="center"
                 android:layout_height="wrap_content"
-                android:text="Hủy"/>
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="15dp"
+                android:text="Vị trí của bạn là"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"/>
+
+            <org.osmdroid.views.MapView
+                android:id="@+id/city_map_view"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_gravity="center"
+                android:src="@drawable/map" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_city_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:textSize="12sp"
+                    android:backgroundTint="@color/viettel_red"
+                    android:text="Hủy"/>
+
+                <Button
+                    android:id="@+id/btn_city_yes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:backgroundTint="@color/viettel_red"
+                    android:text="Xác nhận"/>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>
