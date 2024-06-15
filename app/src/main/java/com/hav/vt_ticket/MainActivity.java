@@ -1,7 +1,6 @@
 package com.hav.vt_ticket;
 
-import android.content.Intent;
-import android.os.Build;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -17,11 +16,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.hav.vt_ticket.Adapter.ViewPagerAdapter;
-import com.hav.vt_ticket.Fragment.HomeFragment;
-import com.hav.vt_ticket.Fragment.NotiFragment;
-import com.hav.vt_ticket.Fragment.ProfileFragment;
-import com.hav.vt_ticket.Fragment.TicketFragment;
-//import com.hav.vt_ticket.Service.TicketCheckService;
+
 
 public class MainActivity extends AppCompatActivity {
 

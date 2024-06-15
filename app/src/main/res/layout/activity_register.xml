@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="16dp"
-    android:background="@color/viettel_red">
+    android:background="@drawable/no_people_bg">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"

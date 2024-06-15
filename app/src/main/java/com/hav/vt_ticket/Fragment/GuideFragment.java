@@ -23,9 +23,9 @@ public class GuideFragment extends Fragment {
 
         String content1 =
                 "• Để lên xe buýt, bạn phải xuất trình vé điện tử cho nhân viên xe buýt và nhận vé giấy từ hãng xe buýt.\n\n" +
-                "• Vé điện tử của Viettel Tikcet sẽ được xuất sau khi chúng tôi xác nhận khoản thanh toán của bạn.\n\n" +
-                "• Bạn có thể sử dụng vé điện tử được gửi cho bạn qua email, SMS hoặc trong Ứng dụng Viettel Tikcet của bạn.\n\n" +
-                "• Vào ngày khởi hành, hãy mang theo vé điện tử và giấy tờ tùy thân của bạn đến điểm lên xe (quầy ở nhà ga, văn phòng đại lý, hoặc nơi khác).\n" +
+                "• Vé điện tử của Viettel Ticket sẽ được xuất sau khi chúng tôi xác nhận khoản thanh toán của bạn.\n\n" +
+                "• Bạn có thể sử dụng vé điện tử được gửi cho bạn qua email, SMS hoặc trong Ứng dụng Viettel Ticket của bạn.\n\n" +
+                "• Vào ngày khởi hành, hãy mang theo vé điện tử và giấy tờ tùy thân của bạn đến điểm lên xe (quầy ở nhà ga, văn phòng đại lý, hoặc nơi khác).\n\n" +
                 "• Thời gian khởi hành, loại xe buýt và tuyến xe buýt có thể thay đổi mà không cần thông báo trước vì lý do hoạt động.\n\n" ;
 
         String content2 = "• Vé khởi hành trong giai đoạn Cuối năm và Tết Nguyên đán có thể không được hoàn, đổi lịch. Vui lòng xác nhận ngày khởi hành của bạn trước khi thực hiện thanh toán.\n\n" +

@@ -34,7 +34,11 @@ public class Ticket implements Serializable {
     @SerializedName("ten_nha_xe")
     private String carName;
 
-    public Ticket(int id, int carId, String startPoint, String endPoint, String startTime, int totalTime, int price, int amount, String carName) {
+    @SerializedName("vitri")
+    private String location;
+
+
+    public Ticket(int id, int carId, String startPoint, String endPoint, String startTime, int totalTime, int price, int amount, String carName, String location) {
         this.id = id;
         this.carId = carId;
         this.startPoint = startPoint;
@@ -44,6 +48,7 @@ public class Ticket implements Serializable {
         this.price = price;
         this.amount = amount;
         this.carName = carName;
+        this.location = location;
     }
 
     public int getId() {
@@ -116,5 +121,13 @@ public class Ticket implements Serializable {
 
     public void setCarName(String carName) {
         this.carName = carName;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

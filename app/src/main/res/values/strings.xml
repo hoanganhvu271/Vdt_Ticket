@@ -24,4 +24,5 @@
     <string name="car_name">Nhà xe:</string>
     <string name="car_capacity">Sức chứa:</string>
     <string name="car_type">Loại xe:</string>
+    <string name="subtitle">Ticket</string>
 </resources>

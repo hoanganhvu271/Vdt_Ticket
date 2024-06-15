@@ -96,6 +96,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Đang theo dõi"
+                        android:layout_gravity="center"
+                        android:textSize="15dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/textColorPrimary" />
                 </LinearLayout>
@@ -127,6 +129,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Đã mua"
+                        android:textSize="15dp"
+                        android:layout_gravity="center"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/textColorPrimary" />
                 </LinearLayout>
@@ -158,6 +162,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Lịch sử xem"
+                        android:textSize="15dp"
+                        android:layout_gravity="center"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/textColorPrimary" />
                 </LinearLayout>

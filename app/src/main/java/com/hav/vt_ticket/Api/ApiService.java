@@ -53,7 +53,8 @@ public interface ApiService {
 
     @FormUrlEncoded
     @POST("follow")
-    Call<Void> updateFollowingTicket(@Field("tbId") String tbId, @Field("cdId") String ticketArray, @Field("price") String priceArray);
+    Call<Void> updateFollowingTicket(@Field("tbId") String tbId, @Field("cdId") String ticketArray,
+                                     @Field("price") String priceArray);
 
 
     @FormUrlEncoded

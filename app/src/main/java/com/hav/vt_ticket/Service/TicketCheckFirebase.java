@@ -26,25 +26,29 @@ import java.util.List;
 public class TicketCheckFirebase extends FirebaseMessagingService{
     @Override
     public void onMessageReceived(@NonNull RemoteMessage message) {
-//        Log.d("Vu", "hehe");
+
 
         if (!message.getData().isEmpty()) {
-//            Log.d("Vu", "Message data payload: " + message.getData());
+
             String title = message.getData().get("title");
             String body = message.getData().get("body");
             String ticketId = message.getData().get("ticket");
 
             Intent intent = new Intent(TicketCheckFirebase.this, DetailActivity.class);
             intent.putExtra("ticket", Integer.parseInt(ticketId));
-            PendingIntent pendingIntent = PendingIntent.getActivity(TicketCheckFirebase.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent pendingIntent = PendingIntent
+                    .getActivity(TicketCheckFirebase.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-            Notification noti = NotificationUtils.createNotification(TicketCheckFirebase.this, title, body, pendingIntent);
+            Notification noti = NotificationUtils
+                    .createNotification(TicketCheckFirebase.this, title, body, pendingIntent);
+
             NotificationUtils.showNotification(TicketCheckFirebase.this, noti);
-//            getTicketInfo(title, body, ticketId);
+
 
 
             //Add to database:
-            NotificationRoom notificationRoom = new NotificationRoom(title, body, "DetailActivity", Integer.parseInt(ticketId));
+            NotificationRoom notificationRoom =
+                    new NotificationRoom(title, body, "DetailActivity", Integer.parseInt(ticketId));
             AppDatabase.getInstance(TicketCheckFirebase.this).notificationDAO().insertNoti(notificationRoom);
         }
     }

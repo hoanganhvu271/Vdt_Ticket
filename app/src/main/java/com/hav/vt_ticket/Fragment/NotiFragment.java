@@ -46,6 +46,7 @@ public class NotiFragment extends Fragment {
                     Class<?> intentClass = Class.forName("com.hav.vt_ticket." + intentName);
                     Intent intent = new Intent(getContext(), intentClass);
                     intent.putExtra("ticket", notificationList.get(position).getTicketId());
+                    Log.d("Vu", "" + notificationList.get(position).getTicketId());
                     startActivity(intent);
                 } catch (ClassNotFoundException e) {
 

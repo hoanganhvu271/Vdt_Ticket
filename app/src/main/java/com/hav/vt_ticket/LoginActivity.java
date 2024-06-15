@@ -72,6 +72,8 @@ public class LoginActivity extends AppCompatActivity {
                         SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
                         SharedPreferences.Editor myEdit = sharedPreferences.edit();
                         myEdit.putString("token", token);
+
+                        //save username
                         myEdit.putString("username", username);
                         myEdit.apply();
 

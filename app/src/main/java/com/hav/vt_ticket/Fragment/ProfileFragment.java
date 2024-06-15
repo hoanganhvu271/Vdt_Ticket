@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -27,6 +28,7 @@ public class ProfileFragment extends Fragment {
     private CardView profileLayout;
     private TextView tvUsername, tvName, tvDob, tvGender, tvCccd, tvEmail;
     private Button registerButton, loginButton;
+    private ImageView logoutButton;
 
     @Nullable
     @Override
@@ -37,6 +39,8 @@ public class ProfileFragment extends Fragment {
 
         profileLayout = view.findViewById(R.id.layout_profile);
         notLoginLayout = view.findViewById(R.id.not_login_layout);
+        logoutButton = view.findViewById(R.id.btn_logout);
+
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MySharedPref", getActivity().MODE_PRIVATE);
         String token = sharedPreferences.getString("token", "");
@@ -61,6 +65,14 @@ public class ProfileFragment extends Fragment {
         loginButton.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             startActivity(intent);
+        });
+
+        logoutButton.setOnClickListener(v -> {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("token", "");
+            editor.apply();
+            profileLayout.setVisibility(View.GONE);
+            notLoginLayout.setVisibility(View.VISIBLE);
         });
 
         return view;

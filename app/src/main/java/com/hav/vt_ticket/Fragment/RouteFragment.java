@@ -1,9 +1,12 @@
 package com.hav.vt_ticket.Fragment;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -25,6 +28,8 @@ public class RouteFragment extends Fragment {
     private TextView tvRouteStart, tvRouteTimeStart, tvRouteEnd, tvRouteTimeEnd, tvRouteTimeTotal, tvRouteDayStart , tvRouteDayEnd;
     private Ticket ticket;
 
+    private LinearLayout ggMap;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -37,6 +42,7 @@ public class RouteFragment extends Fragment {
         tvRouteTimeEnd = view.findViewById(R.id.tv_route_time_end);
         tvRouteDayEnd = view.findViewById(R.id.tv_route_day_end);
         tvRouteTimeTotal = view.findViewById(R.id.tv_route_time_total);
+        ggMap = view.findViewById(R.id.gg_map);
 
         ticket = (Ticket) getArguments().getSerializable("ticket");
 
@@ -60,6 +66,16 @@ public class RouteFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        String[] position = ticket.getLocation().split(" ");
+
+
+        ggMap.setOnClickListener(v -> {
+            String uri = String.format(Locale.ENGLISH, "http://maps.google.com/maps?daddr=%s,%s", position[0], position[1]);
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+            intent.setPackage("com.google.android.apps.maps");
+            startActivity(intent);
+        });
 
         return view;
     }

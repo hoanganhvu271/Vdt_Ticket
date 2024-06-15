@@ -12,6 +12,17 @@
 
     <include layout="@layout/dialog_loading"/>
 
+    <ImageView
+        android:id="@+id/filter"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/filter"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp"
+        android:layout_below="@+id/app_bar_layout"
+
+        android:text="Lọc"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_ticket"
@@ -19,7 +30,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="60dp"
         android:layout_height="match_parent"
-        android:layout_below="@+id/app_bar_layout">
+        android:layout_below="@+id/filter">
 
     </androidx.recyclerview.widget.RecyclerView>
 

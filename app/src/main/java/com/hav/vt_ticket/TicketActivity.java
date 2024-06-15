@@ -9,16 +9,21 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -36,11 +41,13 @@ import com.hav.vt_ticket.Api.ApiService;
 import com.hav.vt_ticket.Model.Ticket;
 import com.hav.vt_ticket.RoomDatabase.AppDatabase;
 import com.hav.vt_ticket.RoomDatabase.TicketRoom;
+import com.hav.vt_ticket.Utils.FormatUtils;
 import com.hav.vt_ticket.Utils.UpdateFollowingTicket;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -60,7 +67,7 @@ public class TicketActivity extends AppCompatActivity {
     private TextView tvCalendar;
     private Button searchBtn;
 
-    private ImageView switchButton;
+    private ImageView switchButton, filterButton;
 
     private View startPoint, endPoint;
 
@@ -70,7 +77,10 @@ public class TicketActivity extends AppCompatActivity {
 
     private TicketAdapter ticketAdapter;
 
-    private List<Ticket> ticketList;
+    private List<Ticket> ticketList, oldTicketList;
+
+    private String selectedTime = "Tất cả";
+    private String selectedCar = "Tất cả";
 
 
     @Override
@@ -121,7 +131,99 @@ public class TicketActivity extends AppCompatActivity {
             showSortDialog();
         });
 
+        filterButton = findViewById(R.id.filter);
+        filterButton.setOnClickListener(v -> {
+            showFilterDialog();
+        });
+
         toolBarSetting();
+
+    }
+
+    private void showFilterDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(TicketActivity.this);
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_filter, null);
+        builder.setView(view);
+
+        Spinner spinnerTime = view.findViewById(R.id.spinner_time);
+        Spinner spinnerCar = view.findViewById(R.id.spinner_car);
+
+        List<String> timeList = Arrays.asList(new String[]{"Tất cả", "0h - 6h", "6h - 12h", "12h - 18h", "18h - 24h"});
+        List<String> carList = Arrays.asList(new String[]{"Tất cả", "Hoang Long"});
+        ArrayAdapter<String> adapterTime = new ArrayAdapter<>(TicketActivity.this, android.R.layout.simple_spinner_item, timeList);
+        ArrayAdapter<String> adapterCar = new ArrayAdapter<>(TicketActivity.this, android.R.layout.simple_spinner_item, carList);
+        adapterTime.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapterCar.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerTime.setAdapter(adapterTime);
+        spinnerCar.setAdapter(adapterCar);
+
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialog.getWindow().setGravity(Gravity.CENTER);
+
+        spinnerTime.setSelection(((ArrayAdapter<String>)spinnerTime.getAdapter()).getPosition(selectedTime));
+        spinnerCar.setSelection(((ArrayAdapter<String>)spinnerCar.getAdapter()).getPosition(selectedCar));
+
+        Button buttonConfirm = view.findViewById(R.id.button_confirm);
+        buttonConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Lấy các tiêu chí lọc từ Spinner
+                selectedTime = spinnerTime.getSelectedItem().toString();
+                selectedCar = spinnerCar.getSelectedItem().toString();
+
+                // Lọc dữ liệu theo các tiêu chí đã chọn
+                List<Ticket> filteredList = new ArrayList<>();
+
+
+
+
+                for (Ticket ticket : oldTicketList) {
+                    if (selectedTime.equals("Tất cả") && selectedCar.equals("Tất cả")) {
+                        filteredList = oldTicketList;
+                        break;
+                    } else if (selectedTime.equals("Tất cả") && !selectedCar.equals("Tất cả")) {
+                        if (ticket.getCarName().equals(selectedCar)) {
+                            filteredList.add(ticket);
+                        }
+                    } else if (!selectedTime.equals("Tất cả") && selectedCar.equals("Tất cả")) {
+                        int time = Integer.parseInt(FormatUtils.getHour(ticket.getStartTime()).split(":")[0]);
+                        if (selectedTime.equals("0h - 6h") && time >= 0 && time < 6) {
+                            filteredList.add(ticket);
+                        } else if (selectedTime.equals("6h - 12h") && time >= 6 && time < 12) {
+                            filteredList.add(ticket);
+                        } else if (selectedTime.equals("12h - 18h") && time >= 12 && time < 18) {
+                            filteredList.add(ticket);
+                        } else if (selectedTime.equals("18h - 24h") && time >= 18 && time < 24) {
+                            filteredList.add(ticket);
+                        }
+                    } else {
+                        int time = ticket.getTotalTime();
+                        if (selectedTime.equals("0h - 6h") && time >= 0 && time < 6 && ticket.getCarName().equals(selectedCar)) {
+                            filteredList.add(ticket);
+                        } else if (selectedTime.equals("6h - 12h") && time >= 6 && time < 12 && ticket.getCarName().equals(selectedCar)) {
+                            filteredList.add(ticket);
+                        } else if (selectedTime.equals("12h - 18h") && time >= 12 && time < 18 && ticket.getCarName().equals(selectedCar)) {
+                            filteredList.add(ticket);
+                        } else if (selectedTime.equals("18h - 24h") && time >= 18 && time < 24 && ticket.getCarName().equals(selectedCar)) {
+                            filteredList.add(ticket);
+                        }
+                    }
+                }
+                // Cập nhật dữ liệu lọc vào RecyclerView
+                updateData(filteredList);
+                // Đóng Dialog
+                dialog.dismiss();
+
+            }
+        });
+
+
 
     }
 
@@ -296,6 +398,7 @@ public class TicketActivity extends AppCompatActivity {
                     List<Ticket> newTickets = response.body().getData();
                     ticketList.clear();
                     ticketList.addAll(newTickets);
+                    oldTicketList = new ArrayList<>(newTickets);
                     ticketAdapter.notifyDataSetChanged();
 
                     if(newTickets.size() == 0){

@@ -3,22 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:background="@color/list_bg"
+    android:padding="14dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        android:text="Thông báo"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_noti"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp">
-    </androidx.recyclerview.widget.RecyclerView>
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
